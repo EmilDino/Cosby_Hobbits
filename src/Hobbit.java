@@ -6,7 +6,7 @@
  *
  */
 
-public class Hobbit implements WeatherObserver{
+public class Hobbit implements WeatherObserver, Runnable {
 
     private String name;
 
@@ -19,5 +19,10 @@ public class Hobbit implements WeatherObserver{
     @Override
     public void update(WeatherType w) {
         System.out.println("Mmmm... " + name + " nyder varmen.");
+    }
+
+    @Override
+    public void run() {
+
     }
 }

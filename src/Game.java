@@ -1,6 +1,10 @@
-public class Game {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Game extends Thread {
 
     public static void main(String[] args) {
+
         System.out.println("Hello Orc & Hobbit World!");
 
         System.out.println("Viser et enum eksempel:  ");
@@ -11,6 +15,7 @@ public class Game {
         System.out.println("Vejret er  " + w.getWeatherNow() + " nu.");
 
         System.out.println("Opretter hobitter ");
+
         Hobbit frodo = new Hobbit("Frodo");
         w.addObserver(frodo);
 
@@ -24,6 +29,12 @@ public class Game {
         Hobbit gollum = new Hobbit("Smeagol");
         w.addObserver(gollum);
 
+        ExecutorService executor = Executors.newCachedThreadPool();
+
+        for(int i = 0; i <1000; i++) {
+            Hobbit hobbit = new Hobbit("Cosby");
+            executor.execute(hobbit);
+        }
 
         System.out.println("Vejret ændrer sig");
         System.out.println("Hobitterne kan mærke varmen på deres små kroppe");
@@ -31,7 +42,7 @@ public class Game {
 
 
 
-        System.out.println("Frodo er død, han har ikke burg fo flere vejropdateringer.");
-        w.removeObserver(frodo);
+        /**System.out.println("Frodo er død, han har ikke burg fo flere vejropdateringer.");
+        w.removeObserver(frodo); */
     }
 }
