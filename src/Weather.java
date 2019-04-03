@@ -7,9 +7,14 @@
  */
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 
 public class Weather {
 
+    private Lock lock = new ReentrantLock(  );
+    public Object addObserver;
     private WeatherType weatherNow;
     private ArrayList<WeatherObserver> observers;
 
@@ -19,12 +24,20 @@ public class Weather {
         observers = new ArrayList<WeatherObserver>();
     }
 
+    public synchronized int totalObservers(){
+        return observers.size();
+    }
+
     public void addObserver(WeatherObserver w) {
+        lock.lock();
         observers.add(w);
+        lock.unlock();
     }
 
     public void removeObserver(WeatherObserver w) {
+        lock.lock();
         observers.remove(w);
+        lock.unlock();
     }
 
     public void timePasses() {

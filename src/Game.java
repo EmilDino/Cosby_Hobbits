@@ -32,7 +32,8 @@ public class Game extends Thread {
         ExecutorService executor = Executors.newCachedThreadPool();
 
         for(int i = 0; i <1000; i++) {
-            Hobbit hobbit = new Hobbit("Cosby");
+            String name = Integer.toString( i );
+            Hobbit hobbit = new Hobbit("Cosby nr: " + i);
             executor.execute(hobbit);
         }
 
@@ -41,8 +42,7 @@ public class Game extends Thread {
         w.timePasses();
 
 
-
-        /**System.out.println("Frodo er død, han har ikke burg fo flere vejropdateringer.");
-        w.removeObserver(frodo); */
+        System.out.println("Frodo er død, han har ikke burg fo flere vejropdateringer.");
+        w.removeObserver(frodo);
     }
 }

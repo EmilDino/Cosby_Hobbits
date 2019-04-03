@@ -6,14 +6,30 @@
  *
  */
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Hobbit implements WeatherObserver, Runnable {
+    Lock lock = new ReentrantLock();
+
+    public static int HobbitAntal = 0;
 
     private String name;
 
+    public static int getHobbitAntal(){
+        return HobbitAntal;
+    }
+
+    public synchronized void addHobbit(){
+        HobbitAntal++;
+    }
+
     public Hobbit(String name) {
+        lock.lock();
         this.name = name;
         System.out.println(name + " er født.");
-
+        addHobbit();
+        lock.unlock();
     }
 
     @Override
